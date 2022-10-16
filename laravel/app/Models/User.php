@@ -45,16 +45,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function homes()
-    {
-        return $this->hasMany(Home::class);
-    }
-
-    public function licenses()
-    {
-        return $this->belongsToMany(License::class, 'license_user');
-    }
-
     //Metodo para comprobar si un usuario tiene permisos y por defecto comprueba Admin
     public function has($licence = "Admin")
     {

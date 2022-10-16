@@ -20,7 +20,8 @@ use Inertia\Inertia;
 */
 
 // Grupo que añade por defecto el prefijo de /admin/ y exige que el usuario esté registrado y sea admin
-Route::prefix('admin')->middleware(['auth', 'verified', 'HasAdmin'])->group(function () {
+//Route::prefix('admin')->middleware(['auth', 'verified', 'HasAdmin'])->group(function () {
+Route::prefix('admin')->group(function () {
     $indexAdminController = [AdminController::class, 'indexPaperbase'];
 
     // Redirección
@@ -28,7 +29,7 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'HasAdmin'])->group(func
         return redirect('admin/home');
     });
 
-    // Admin Home princiapl
+    // Admin HomeAlternative princiapl
     Route::get('/home', $indexAdminController)->name("admin_home");
 
     // Admin Usuarios

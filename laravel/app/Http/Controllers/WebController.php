@@ -23,17 +23,8 @@ class WebController extends Controller
 
     public function index()
     {
-        $purchaseTypeList = HomePurchaseType::all();
-        $homeTypeList = HomeType::all();
-        $cities = City::all()->sortBy("name")->pluck("name");
+        return Inertia::render('Home', [
 
-        return Inertia::render('Welcome', [
-            'purchaseTypeList' => $purchaseTypeList,
-            'homeTypeList' => $homeTypeList,
-            'cities' => $cities,
-            'dataHomeAlquiler' => $this->getHomesByPurchageType($this::PURCHASE_ALQUILAR),
-            'dataHomeComprar' => $this->getHomesByPurchageType($this::PURCHASE_COMPRAR),
-            'dataHomeCompartir' => $this->getHomesByPurchageType($this::PURCHASE_COMPARTIR),
         ]);
     }
 

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {useRef, useState} from "react";
 import axios from "axios";
-import "react-upload-gallery/dist/style.css";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
