@@ -53,6 +53,27 @@ export default function ContentUser({data}) {
             type: 'boolean',
         },
         {
+            field: 'isNew',
+            headerName: 'Editar Noticias',
+            width: 150,
+            editable: true,
+            type: 'boolean',
+        },
+        {
+            field: 'isGallery',
+            headerName: 'Editar Galeria',
+            width: 150,
+            editable: true,
+            type: 'boolean',
+        },
+        {
+            field: 'isEvent',
+            headerName: 'Editar eventos',
+            width: 150,
+            editable: true,
+            type: 'boolean',
+        },
+        {
             field: 'actions',
             type: 'actions',
             headerName: 'Acciones',
@@ -86,6 +107,9 @@ export default function ContentUser({data}) {
                     email: user[0].email,
                     password: "",
                     isAdmin: user[0].isAdmin,
+                    isNew: user[0].isNew,
+                    isGallery: user[0].isGallery,
+                    isEvent: user[0].isEvent,
                 }
             }
         );
@@ -150,6 +174,9 @@ export default function ContentUser({data}) {
                                             email: "",
                                             password: "",
                                             isAdmin: false,
+                                            isGallery: false,
+                                            isNew: false,
+                                            isEvent: false,
                                         }
                                     }
                                 )

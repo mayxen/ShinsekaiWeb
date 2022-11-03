@@ -30,30 +30,11 @@ Route::prefix('admin')->group(function () {
     });
 
     // Admin HomeAlternative princiapl
-    Route::get('/home', $indexAdminController)->name("admin_home");
+    Route::get('/home', $indexAdminController)->name("admin_homes");
 
     // Admin Usuarios
     Route::get('/users', $indexAdminController)->name("admin_users");
     Route::delete('/user_delete/{id}', [AdminController::class, "deleteUser"]);
     Route::post('/user_add', [AdminController::class, "addUser"]);
     Route::put('/user_update/{id}', [AdminController::class, "updateUser"]);
-
-    // Admin Tipos de casas
-    Route::get('/home_types', $indexAdminController)->name("admin_home_types");
-    Route::delete('/home_type_delete/{id}', [AdminController::class, "deleteHomeType"]);
-    Route::post('/home_type_add', [AdminController::class, "addHomeType"]);
-    Route::put('/home_type_update/{id}', [AdminController::class, "updateHomeType"]);
-
-    // Admin Casas
-    Route::get('/homes', $indexAdminController)->name("admin_homes");
-    Route::get('/get_homes', [AdminController::class, "getHomes"]);
-    Route::delete('/home_delete/{id}', [AdminController::class, "deleteHome"]);
-    Route::post('/homes_delete', [AdminController::class, 'deleteHomes']);
-    Route::post('/store_home_before_add_images', [AdminController::class, 'storeHomeBeforeAddImages']);
-    Route::put('/home_update/{id}', [AdminController::class, "updateHome"]);
-    Route::get('/get_home_images/{id}', [AdminController::class, 'getImages']);
-    Route::post('/insert_home_images/{id}', [AdminController::class, 'insertImages']);
-    Route::delete('/delete_home_images/{id}', [AdminController::class, 'deleteImages']);
-
-//    Route::get('/destacar', $indexAdminController);
 });

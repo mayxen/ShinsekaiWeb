@@ -1,50 +1,272 @@
-.tarjetas {
-    border-radius: 50px;
+//imports
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap');
+// Variables
+@import 'variables';
+
+body {
+    margin: 0px !important;
+    font-family: 'Titillium Web', sans-serif;
 }
 
-.rotate {
-    transform: rotate(-45deg);
-    position: relative;
-    top: -390px;
-    left: -80px;
-    font-family: 'Anton', sans-serif;
-    font-size: 30px;
-    color: #f56565;
+.container {
+    @media only screen and (max-width: 630px) {
+        width: auto;
+        margin: 0px;
+    }
+    width: 80%;
+    margin: 5px auto;
 }
 
-.noticias {
+.containerModal {
+    @media only screen and (max-width: 630px) {
+        width: 80%;
+    }
+    width: 30%;
+    margin: 5px auto;
+}
+
+main {
+    min-height: 75vh;
+    background-color: $white;
+}
+
+.header {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    font-family: 'Krona One', sans-serif;
-}
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    background: white;
+    z-index: 10;
 
-.noticia {
-    width: 300px;
-    height: 324px;
-    margin: 20px;
-}
+    .logo {
+        padding: 10px;
 
-@media only screen and (max-width: 1280px) {
-    .rotate {
-        transform: rotate(-45deg);
-        position: relative;
-        top: -300px;
-        left: -167px;
-        font-family: 'Anton', sans-serif;
-        font-size: 30px;
-        color: #f56565;
+        img {
+            width: 100px;
+            cursor: pointer;
+        }
+    }
+
+    .links {
+
+        a {
+            margin: 5px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .menu-icon {
+            font-size: 40px;
+        }
     }
 }
 
-@media only screen and (max-width: 1024px) {
+.footer {
+    @media only screen and (max-width: 630px) {
+        justify-content: center;
+        flex-wrap: wrap;
+        display: flex;
+        width: 100%;
+    }
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background: $color-primary-3;
+    z-index: 10;
+    color: white;
+
+    .logo {
+        padding: 5px;
+        width: fit-content;
+        height: fit-content;
+        display: flex;
+        margin-top: 0.25%;
+
+        @media only screen and (max-width: 630px) {
+            margin-top: 6%;
+        }
+
+        img {
+            @media only screen and (max-width: 630px) {
+                width: 100%;
+            }
+            max-width: 145px;
+            max-height: 145px;
+            border-radius: 20px;
+        }
+    }
+
+    .footer-sections-container {
+        width: 100%;
+    }
+
+    .footer-columnHead {
+        font-weight: 700;
+        color: $color-primary-1;
+    }
+
+    .MuiListItem-root {
+        padding-left: 0px;
+    }
+
+    .MuiTypography-root {
+        color: $color-primary-4;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration-line: underline;
+        }
+    }
+
+    svg {
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .main-Section-Footer {
+        @media only screen and (max-width: 630px) {
+            flex-direction: column;
+            padding-left: 85px;
+            margin-bottom: 20px;
+        }
+        display: flex;
+        justify-content: space-around;
+        padding-bottom: 0.6%;
+    }
+
+    .footer-divider {
+        margin-left: 27%;
+        margin-right: 20%;
+        @media only screen and (max-width: 630px) {
+            margin: 0px;
+        }
+    }
+
+    .secondary-Section-Footer {
+        @media only screen and (max-width: 630px) {
+            padding-left: 0px;
+        }
+        inline-size: fit-content;
+        justify-content: space-evenly;
+        align-self: center;
+        padding-bottom: 15px;
+        margin: 0 auto;
+
+        .footer-copyright-message-div {
+            margin-top: 17px;
+        }
+
+        .footer-copyright-message {
+            color: $color-primary-1;
+            text-align: center;
+            margin: 0;
+        }
+
+        .MuiListItem-root {
+            padding-left: 0px;
+            margin: 0px 20px;
+
+            .MuiTypography-root {
+                color: $color-primary-2;
+            }
+        }
+
+        .icon {
+            @media only screen and (max-width: 630px) {
+                margin-right: 0px;
+            }
+            margin-top: 20px;
+            text-align: center;
+            margin-right: 10px;
+
+            svg {
+                color: $color-primary-4;
+                cursor: auto;
+                width: 2em;
+            }
+        }
+    }
+
+    .navigation-footer {
+        @media only screen and (max-width: 630px) {
+            flex-direction: column;
+            display: none;
+        }
+        font-weight: bold;
+        display: flex;
+        flex-direction: row;
+        margin-top: 7.5px;
+
+        a {
+            color: $color-primary-4 !important;
+        }
+    }
+}
+
+.tarjetas {
+    margin: 100px 0px;
+
     .rotate {
+        left: 100px;
         transform: rotate(-45deg);
-        position: relative;
-        top: -210px;
-        left: -96px;
+        position: absolute;
         font-family: 'Anton', sans-serif;
         font-size: 30px;
-        color: #f56565;
+        color: $white;
+        text-shadow: 1px 2px $color-primary-0;
+    }
+
+    @media only screen and (max-width: 1280px) {
+        .rotate {
+            transform: rotate(-45deg);
+            position: relative;
+            left: -73px;
+            font-family: 'Anton', sans-serif;
+            font-size: 30px;
+        }
+    }
+
+    @media only screen and (max-width: 1024px) {
+        .rotate {
+            transform: rotate(-45deg);
+            position: relative;
+            top: -53px;
+            left: -156px;
+            font-family: 'Anton', sans-serif;
+            font-size: 30px;
+        }
+    }
+
+    .panel {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        font-family: 'Krona One', sans-serif;
+        background: $gradient-right;
+
+        a {
+            text-decoration: none;
+            color: $white;
+            text-shadow: 1px 2px $color-primary-0;
+        }
+
+        .tarjeta {
+            width: 300px;
+            height: 324px;
+            margin: 20px;
+            background-color: $color-primary-4;
+            border-radius: 15px;
+            padding: 8px;
+
+            p {
+                text-align: center;
+                color: $white;
+                text-shadow: 1px 2px $color-primary-0;
+            }
+
+            img {
+                width: 100%;
+            }
+        }
     }
 }

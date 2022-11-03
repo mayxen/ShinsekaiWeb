@@ -4,15 +4,13 @@ import {Route, Routes} from "react-router-dom";
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Navigator from './Navigator';
-import ContentHomes from './ContentHomes';
-import ContentHomeTypes from "./ContentHomeTypes";
 import ContentUser from "./ContentUser";
 import AdminHome from "./AdminHome";
 import Admin from "@/Layouts/Admin";
 
 const drawerWidth = 256;
 
-export default function Paperbase({users, types, homes, purchaseTypes, cities}) {
+export default function Paperbase({users}) {
     const [mobileOpen, setMobileOpen] = useState(false);
     const isSmUp = null;
 
@@ -46,11 +44,6 @@ export default function Paperbase({users, types, homes, purchaseTypes, cities}) 
                         <Routes>
                             <Route path='/admin/home' element={<AdminHome/>}/>
                             <Route path='/admin/users' element={<ContentUser data={users}/>}/>
-                            <Route path='/admin/home_types' element={<ContentHomeTypes data={types}/>}/>
-                            <Route path='/admin/homes' element={<ContentHomes data={homes.data} hometypes={types}
-                                                                              homepurchasetypes={purchaseTypes}
-                                                                              cities={cities}/>}/>
-                            {/*<Route path='/admin/highlighted_homes' element={<ContentHighlightedHome setPageLoaded={setPageLoaded}/>}/>*/}
                         </Routes>
                     </Box>
                 </Box>

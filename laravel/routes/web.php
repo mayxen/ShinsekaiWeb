@@ -20,26 +20,10 @@ $webControllerSearchPost = [WebController::class, 'searchPost'];
 |
 */
 
-//necesita estar registrado
-Route::middleware(['auth', 'verified'])->group(function () {
-    $webControllerProfile = [WebController::class, 'profile'];
-    $webControllerProfileUpdate = [UserController::class, 'update'];
-
-    Route::get('/profile', $webControllerProfile)->name("profile");
-    Route::put('/profile/{id}', $webControllerProfileUpdate)->name("update-profile");
-});
-
 Route::get('/', $webControllerIndex)->name("index");
-Route::get('/search', $webControllerSearch)->name("search");
-Route::post('/search', $webControllerSearchPost)->name("search");
-Route::post('/search_filter', [WebController::class, 'searchFilterHomes']);
-Route::get('/home/{id}', [HomeController::class, 'index'])->name("home");
 Route::get('/about', [WebController::class, 'about'])->name("about");
 Route::get('/contact', [WebController::class, 'contact'])->name("contact");
-Route::get('/defyhome-privacy-policy', [WebController::class, 'privacyPolicy'])->name("privacy-policy");
-Route::get('/defyhome-cookies', [WebController::class, 'cookies'])->name("cookies");
-Route::get('/frequently-asked-questions', [WebController::class, 'faq'])->name("faq");
-Route::get('/defyhome-customer-service', [WebController::class, 'customerService'])->name("customer-service");
+
 
 Route::post('/notify-owner', [WebController::class, 'mailOwner'])->name('notify-owner')
     ->middleware(['throttle:userMails']);

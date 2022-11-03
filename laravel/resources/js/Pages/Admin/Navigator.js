@@ -11,10 +11,8 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 
 // icons
-import DnsRoundedIcon from '@mui/icons-material/DnsRounded';
 import HomeIcon from '@mui/icons-material/Home';
 import PeopleIcon from '@mui/icons-material/People';
-import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 
 const item = {
     py: '2px',
@@ -45,29 +43,11 @@ export default function Navigator(props) {
                     ruta: '/admin/home',
                 },
                 {
-                    id: 'Casas',
-                    icon: <AddBusinessIcon/>,
-                    active: false,
-                    ruta: '/admin/homes',
-                },
-                {
-                    id: 'Tipos de casas',
-                    icon: <DnsRoundedIcon/>,
-                    active: false,
-                    ruta: '/admin/home_types'
-                },
-                {
                     id: 'Usuarios',
                     icon: <PeopleIcon/>,
                     active: false,
                     ruta: '/admin/users'
                 },
-                // {
-                //     id: 'Productos destacados',
-                //     icon: <StarRateIcon/>,
-                //     active: false,
-                //     ruta: '/admin/destacar'
-                // }
             ]
         },
     ]);

@@ -7,6 +7,12 @@ use App\Models\Log;
 class GlobalFunctions
 {
     const IdLicenceAdmin = 1;
+    const IdLicenceGallery = 2;
+    const IdLicenceEvent = 3;
+    const IdLicenceNew = 4;
+    const LicenceGallery = "Gallery";
+    const LicenceEvent = "Event";
+    const LicenceNew = "New";
 
     const purchaseType = [
         0 => 'Comprar',

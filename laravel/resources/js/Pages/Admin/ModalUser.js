@@ -13,14 +13,16 @@ import DialogTitle from '@mui/material/DialogTitle';
 import ToggleButton from '@mui/material/ToggleButton';
 
 export default function ModalUser({setUsers, open, setOpen, type, user, setUser, setUsersAux, setToastOpen}) {
-    const [selected, setSelected] = useState(false);
+    const [Adminselected, setAdminselected] = useState(false);
+    const [Galleryselected, setGalleryselected] = useState(false);
+    const [Eventselected, setEventselected] = useState(false);
+    const [Newselected, setNewselected] = useState(false);
     const [userNameHelperText, setUserNameHelperText] = useState("");
     const [userNameError, setUserNameError] = useState(false);
     const [userEmailHelperText, setUserEmailHelperText] = useState("");
     const [userEmailError, setUserEmailError] = useState(false);
     const [userPasswordHelperText, setUserPasswordHelperText] = useState("");
     const [userPasswordError, setUserPasswordError] = useState(false);
-
     const handleClose = () => {
         setUserNameHelperText("");
         setUserEmailHelperText("");
@@ -95,6 +97,9 @@ export default function ModalUser({setUsers, open, setOpen, type, user, setUser,
                             email: "",
                             password: "",
                             isAdmin: false,
+                            isGallery: false,
+                            isEvent: false,
+                            isNew: false,
                         }
                     });
                     setUsers(response.data);
@@ -119,6 +124,9 @@ export default function ModalUser({setUsers, open, setOpen, type, user, setUser,
                             email: "",
                             password: "",
                             isAdmin: false,
+                            isGallery: false,
+                            isEvent: false,
+                            isNew: false,
                         }
                     });
                     setUsers(response.data);
@@ -206,15 +214,59 @@ export default function ModalUser({setUsers, open, setOpen, type, user, setUser,
                     value="check"
                     selected={user.isAdmin}
                     onChange={() => {
-                        setSelected(!selected);
+                        setAdminselected(!Adminselected);
                         setUser({
                             ...user,
-                            isAdmin: !selected
+                            isAdmin: !Adminselected
                         });
                     }}
                 >
                     <CheckIcon/>
                     Admin
+                </ToggleButton>
+                <ToggleButton
+                    value="check"
+                    selected={user.isGallery}
+                    onChange={() => {
+                        setGalleryselected(!Galleryselected);
+                        setUser({
+                            ...user,
+                            isGallery: !Galleryselected
+                        });
+                    }}
+                >
+                    <CheckIcon/>
+                    Editar Galeria
+                </ToggleButton>
+
+                <ToggleButton
+                    value="check"
+                    selected={user.isEvent}
+                    onChange={() => {
+                        setEventselected(!Eventselected);
+                        setUser({
+                            ...user,
+                            isEvent: !Eventselected
+                        });
+                    }}
+                >
+                    <CheckIcon/>
+                    Editar Eventos
+                </ToggleButton>
+
+                <ToggleButton
+                    value="check"
+                    selected={user.isNew}
+                    onChange={() => {
+                        setNewselected(!Newselected);
+                        setUser({
+                            ...user,
+                            isNew: !Newselected
+                        });
+                    }}
+                >
+                    <CheckIcon/>
+                    Editar Noticias
                 </ToggleButton>
 
             </DialogContent>

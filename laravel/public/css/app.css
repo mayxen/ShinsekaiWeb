@@ -1,49 +1,263 @@
-.tarjetas {
-  border-radius: 50px;
+@import url(https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Krona+One&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Anton&display=swap);
+/* SCSS Gradient */
+body {
+  margin: 0px !important;
+  font-family: "Titillium Web", sans-serif;
 }
 
-.rotate {
+.container {
+  width: 80%;
+  margin: 5px auto;
+}
+@media only screen and (max-width: 630px) {
+  .container {
+    width: auto;
+    margin: 0px;
+  }
+}
+
+.containerModal {
+  width: 30%;
+  margin: 5px auto;
+}
+@media only screen and (max-width: 630px) {
+  .containerModal {
+    width: 80%;
+  }
+}
+
+main {
+  min-height: 75vh;
+  background-color: snow;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  background: white;
+  z-index: 10;
+}
+.header .logo {
+  padding: 10px;
+}
+.header .logo img {
+  width: 100px;
+  cursor: pointer;
+}
+.header .links a {
+  margin: 5px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.header .links .menu-icon {
+  font-size: 40px;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background: #fdcff3ff;
+  z-index: 10;
+  color: white;
+}
+@media only screen and (max-width: 630px) {
+  .footer {
+    justify-content: center;
+    flex-wrap: wrap;
+    display: flex;
+    width: 100%;
+  }
+}
+.footer .logo {
+  padding: 5px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: flex;
+  margin-top: 0.25%;
+}
+@media only screen and (max-width: 630px) {
+  .footer .logo {
+    margin-top: 6%;
+  }
+}
+.footer .logo img {
+  max-width: 145px;
+  max-height: 145px;
+  border-radius: 20px;
+}
+@media only screen and (max-width: 630px) {
+  .footer .logo img {
+    width: 100%;
+  }
+}
+.footer .footer-sections-container {
+  width: 100%;
+}
+.footer .footer-columnHead {
+  font-weight: 700;
+  color: #40434eff;
+}
+.footer .MuiListItem-root {
+  padding-left: 0px;
+}
+.footer .MuiTypography-root {
+  color: #de89beff;
+  text-decoration: none;
+}
+.footer .MuiTypography-root:hover {
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
+}
+.footer svg {
+  color: #fff;
+  cursor: pointer;
+}
+.footer .main-Section-Footer {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 0.6%;
+}
+@media only screen and (max-width: 630px) {
+  .footer .main-Section-Footer {
+    flex-direction: column;
+    padding-left: 85px;
+    margin-bottom: 20px;
+  }
+}
+.footer .footer-divider {
+  margin-left: 27%;
+  margin-right: 20%;
+}
+@media only screen and (max-width: 630px) {
+  .footer .footer-divider {
+    margin: 0px;
+  }
+}
+.footer .secondary-Section-Footer {
+  inline-size: -webkit-fit-content;
+  inline-size: -moz-fit-content;
+  inline-size: fit-content;
+  justify-content: space-evenly;
+  align-self: center;
+  padding-bottom: 15px;
+  margin: 0 auto;
+}
+@media only screen and (max-width: 630px) {
+  .footer .secondary-Section-Footer {
+    padding-left: 0px;
+  }
+}
+.footer .secondary-Section-Footer .footer-copyright-message-div {
+  margin-top: 17px;
+}
+.footer .secondary-Section-Footer .footer-copyright-message {
+  color: #40434eff;
+  text-align: center;
+  margin: 0;
+}
+.footer .secondary-Section-Footer .MuiListItem-root {
+  padding-left: 0px;
+  margin: 0px 20px;
+}
+.footer .secondary-Section-Footer .MuiListItem-root .MuiTypography-root {
+  color: #c297b8ff;
+}
+.footer .secondary-Section-Footer .icon {
+  margin-top: 20px;
+  text-align: center;
+  margin-right: 10px;
+}
+@media only screen and (max-width: 630px) {
+  .footer .secondary-Section-Footer .icon {
+    margin-right: 0px;
+  }
+}
+.footer .secondary-Section-Footer .icon svg {
+  color: #de89beff;
+  cursor: auto;
+  width: 2em;
+}
+.footer .navigation-footer {
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  margin-top: 7.5px;
+}
+@media only screen and (max-width: 630px) {
+  .footer .navigation-footer {
+    flex-direction: column;
+    display: none;
+  }
+}
+.footer .navigation-footer a {
+  color: #de89beff !important;
+}
+
+.tarjetas {
+  margin: 100px 0px;
+}
+.tarjetas .rotate {
+  left: 100px;
   transform: rotate(-45deg);
-  position: relative;
-  top: -390px;
-  left: -80px;
+  position: absolute;
   font-family: "Anton", sans-serif;
   font-size: 30px;
-  color: #f56565;
+  color: snow;
+  text-shadow: 1px 2px #070707ff;
 }
-
-.noticias {
+@media only screen and (max-width: 1280px) {
+  .tarjetas .rotate {
+    transform: rotate(-45deg);
+    position: relative;
+    left: -73px;
+    font-family: "Anton", sans-serif;
+    font-size: 30px;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .tarjetas .rotate {
+    transform: rotate(-45deg);
+    position: relative;
+    top: -53px;
+    left: -156px;
+    font-family: "Anton", sans-serif;
+    font-size: 30px;
+  }
+}
+.tarjetas .panel {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   font-family: "Krona One", sans-serif;
+  background: linear-gradient(90deg, #c297b8ff, #fdcff3ff, #de89beff);
 }
-
-.noticia {
+.tarjetas .panel a {
+  text-decoration: none;
+  color: snow;
+  text-shadow: 1px 2px #070707ff;
+}
+.tarjetas .panel .tarjeta {
   width: 300px;
   height: 324px;
   margin: 20px;
+  background-color: #de89beff;
+  border-radius: 15px;
+  padding: 8px;
 }
-
-@media only screen and (max-width: 1280px) {
-  .rotate {
-    transform: rotate(-45deg);
-    position: relative;
-    top: -300px;
-    left: -167px;
-    font-family: "Anton", sans-serif;
-    font-size: 30px;
-    color: #f56565;
-  }
+.tarjetas .panel .tarjeta p {
+  text-align: center;
+  color: snow;
+  text-shadow: 1px 2px #070707ff;
 }
-@media only screen and (max-width: 1024px) {
-  .rotate {
-    transform: rotate(-45deg);
-    position: relative;
-    top: -210px;
-    left: -96px;
-    font-family: "Anton", sans-serif;
-    font-size: 30px;
-    color: #f56565;
-  }
+.tarjetas .panel .tarjeta img {
+  width: 100%;
 }

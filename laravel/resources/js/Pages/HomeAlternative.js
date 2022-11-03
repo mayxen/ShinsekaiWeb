@@ -21,7 +21,6 @@ import Button from "@mui/material/Button";
 import {useSnackbar} from 'notistack';
 import {Navigation, Pagination, Scrollbar} from 'swiper';
 import DOMPurify from 'dompurify';
-import OpenMap from "@/Components/DefyComponents/OpenMap";
 // Import Swiper styles
 import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
@@ -173,10 +172,6 @@ export default function HomeAlternative(props) {
                             <div className="content setBlueColor"
                                  dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(props.home.description)}}/>
                         </div>
-                        <OpenMap getLatLng={{
-                            lat: props.home.lat ? props.home.lat : 0,
-                            lng: props.home.lng ? props.home.lng : 0
-                        }}/>
                     </div>
                     <div className={"contactForm"}>
                         <div className="setSticky">

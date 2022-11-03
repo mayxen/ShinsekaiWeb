@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
+use PharIo\Manifest\License;
 
 class User extends Authenticatable
 {
@@ -44,6 +45,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function licenses()
+    {
+        return $this->belongsToMany(License::class, 'license_user');
+    }
 
     //Metodo para comprobar si un usuario tiene permisos y por defecto comprueba Admin
     public function has($licence = "Admin")

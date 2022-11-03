@@ -24,7 +24,6 @@ import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {DatePicker} from "@mui/lab";
 import moment from "moment";
-import OpenMap from "@/Components/DefyComponents/OpenMap";
 
 export default function ModalHomes({
                                        homeTypes,
@@ -425,9 +424,6 @@ export default function ModalHomes({
                                 });
                             }}
                         />
-                    </Grid>
-                    <Grid item md={12}>
-                        <OpenMap setLatLng={setLatLng} latLng={latLng} home={home} setHome={setHome}/>
                     </Grid>
                 </Grid>
                 <br/>

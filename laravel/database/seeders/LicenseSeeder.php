@@ -16,7 +16,9 @@ class LicenseSeeder extends Seeder
     {
         $licenses = [
             "Admin",
-            "NoAdmin"
+            "Gallery",
+            "Event",
+            "New",
         ];
         foreach ($licenses as $license) {
             DB::table('licenses')->insert([

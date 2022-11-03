@@ -6,40 +6,8 @@ import Divider from "@mui/material/Divider";
 
 export default function Footer() {
 
-    useEffect(() => {
-        document.getElementById("cookieconsent").style.display = "block";
-
-        window.cookieconsent.initialise({
-            container: document.getElementById("cookieconsent"),
-            onPopupClose: function () {
-                document.getElementById("cookieconsent").style.display = "none";
-            },
-            onInitialise: function (status) {
-                if (status === "dismiss" || status === "deny" || status === "allow")
-                    document.getElementById("cookieconsent").style.display = "none";
-            },
-            content: {
-                message: 'Esta web emplea el uso de cookies para mejorar su experiencia.',
-                dismiss: 'De acuerdo',
-                allow: 'Permitir cookies',
-                deny: 'Rechazar',
-                showLink: 'false',
-                link: 'Más información',
-                href: 'https://www.defyhome.com/defyhome-cookies',
-                close: '&#x274c;',
-                policy: 'Cookie Policy',
-                target: '_blank',
-            },
-            cookie: {
-                name: "defyhome_cookies",
-            },
-            type: "opt-out",
-        })
-    }, []);
-
     return (
         <>
-            <div id="cookieconsent"/>
             <div className={'footer containerModal'}>
                 <div className={'footer-sections-container'}>
                     <div className={'main-Section-Footer'}>

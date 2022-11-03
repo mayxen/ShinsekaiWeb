@@ -12,9 +12,7 @@ import {Link, Menu, MenuItem} from "@mui/material";
 export default function Header() {
 
     const {post} = useForm({});
-
     const {auth} = usePage().props;
-
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
 
@@ -39,9 +37,6 @@ export default function Header() {
                 <div className={'links'}>
                     <Link href={route("login")}>
                         login
-                    </Link>
-                    <Link href={route("register")}>
-                        Register
                     </Link>
                 </div>
             )}

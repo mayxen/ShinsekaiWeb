@@ -4,11 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\HomeImageResource;
 use App\Http\Resources\HomeResource;
-use App\Models\City;
-use App\Models\Home;
-use App\Models\HomeImage;
-use App\Models\HomePurchaseType;
-use App\Models\HomeType;
 use App\Models\User;
 use Dnsimmons\Imager\Imager;
 use http\Exception;
@@ -26,21 +21,8 @@ class AdminController extends Controller
     public function indexPaperbase()
     {
         $users = $this->getAllUsers();
-
-        $types = HomeType::all();
-
-        $homes = HomeResource::collection(Home::all());
-
-        $purchaseTypes = HomePurchaseType::all();
-
-        $cities = City::all()->sortBy("name")->pluck("name");
-
         return Inertia::render('Admin/Paperbase', [
             "users" => $users,
-            "types" => $types,
-            "homes" => $homes,
-            "purchaseTypes" => $purchaseTypes,
-            "cities" => $cities,
         ]);
     }
 
@@ -68,8 +50,15 @@ class AdminController extends Controller
         if ($request->isAdmin) {
             $user->licenses()->attach(GlobalFunctions::IdLicenceAdmin);
         }
-        $userAuth = Auth::user();
-        GlobalFunctions::createLog("$userAuth->name ha creado el usuario $user->email", $userAuth->id);
+        if ($request->isGallery) {
+            $user->licenses()->attach(GlobalFunctions::IdLicenceGallery);
+        }
+        if ($request->isEvent) {
+            $user->licenses()->attach(GlobalFunctions::IdLicenceEvent);
+        }
+        if ($request->isNew) {
+            $user->licenses()->attach(GlobalFunctions::IdLicenceNew);
+        }
 
         return $this->getAllUsers();
     }
@@ -95,14 +84,21 @@ class AdminController extends Controller
         }
 
         $user->save();
-
+        //TODO Aquí se deberá poner un bucle con todos los ataches que hagan falta
         $user->licenses()->detach();
         if ($request->isAdmin) {
             $user->licenses()->attach(GlobalFunctions::IdLicenceAdmin);
         }
+        if ($request->isGallery) {
+            $user->licenses()->attach(GlobalFunctions::IdLicenceGallery);
+        }
+        if ($request->isEvent) {
+            $user->licenses()->attach(GlobalFunctions::IdLicenceEvent);
+        }
+        if ($request->isNew) {
+            $user->licenses()->attach(GlobalFunctions::IdLicenceNew);
+        }
 
-        $userAuth = Auth::user();
-        GlobalFunctions::createLog("$userAuth->name ha modificado el usuario $user->email", $userAuth->id);
         return $this->getAllUsers();
     }
 
@@ -110,10 +106,6 @@ class AdminController extends Controller
     public function deleteUser($id)
     {
         $user = User::find($id);
-
-        $userAuth = Auth::user();
-        GlobalFunctions::createLog("$userAuth->name ha eliminado el usuario $user->email", $userAuth->id);
-
         $user->delete();
         return response()->json($user);
     }
@@ -121,9 +113,16 @@ class AdminController extends Controller
     private function getAllUsers()
     {
         $users = User::get(['id', 'name', 'email']);
-        foreach ($users as $user) {
-            $user['isAdmin'] = GlobalFunctions::checkUserHasLicence($user->licenses);
-        }
+
+        //TODO esto falla y no me apetece mirarlo ahora
+//        foreach ($users as $user) {
+//            if (isset($user->licenses)) {
+//                $user['isAdmin'] = GlobalFunctions::checkUserHasLicence($user->licenses);
+//                $user['isGallery'] = GlobalFunctions::checkUserHasLicence($user->licenses, GlobalFunctions::LicenceGallery);
+//                $user['isEvent'] = GlobalFunctions::checkUserHasLicence($user->licenses, GlobalFunctions::LicenceEvent);
+//                $user['isNew'] = GlobalFunctions::checkUserHasLicence($user->licenses, GlobalFunctions::LicenceNew);
+//            }
+//        }
         return $users;
     }
 

@@ -3,10 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\HomeResource;
-use App\Models\City;
-use App\Models\Home;
-use App\Models\HomePurchaseType;
-use App\Models\HomeType;
 use App\Mail\NotifyOwner;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,8 +19,9 @@ class WebController extends Controller
 
     public function index()
     {
+        $homeElements = [['name' => 'Noticias', "data" => [['name' => 'prueba', "desc" => "asdasdasdasdasd"],['name' => 'prueba', "desc" => "asdasdasdasdasd"],['name' => 'prueba', "desc" => "asdasdasdasdasd"],['name' => 'prueba', "desc" => "asdasdasdasdasd"]]], ['name' => 'Eventos', "data" => [['name' => 'prueba', "desc" => "asdasdasdasdasd"]]]];
         return Inertia::render('Home', [
-
+            'homeElements' => $homeElements
         ]);
     }
 

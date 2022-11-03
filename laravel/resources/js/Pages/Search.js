@@ -17,8 +17,6 @@ import {
     Select,
     TextField
 } from "@mui/material";
-import HomeCard from "@/Components/DefyComponents/HomeCard";
-import SearchHome from "@/Components/DefyComponents/SearchHome";
 import Breadcrumb from "@/Components/Breadcrumb";
 import {InputAdornment} from "@material-ui/core";
 import {DatePicker} from "@mui/lab";
