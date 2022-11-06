@@ -12,10 +12,10 @@ const appName = window.document.getElementsByTagName('title')[0]?.innerText || '
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#FF8927'
+            main: '#de89beff'
         },
         secondary: {
-            main: '#FFCA9D'
+            main: '#fdcff3ff'
         },
     }
 });

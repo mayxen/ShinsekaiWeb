@@ -32,6 +32,9 @@ export default function Login({canResetPassword}) {
         <Web>
             <Head title="Log in"/>
             <div className="containerModal">
+                <div className="errorsModal">
+                    <div className="">¡Esta Parte es exclusiva para miembros de shinsekai!</div>
+                </div>
                 <ValidationErrors errors={errors}/>
 
                 <form className="formContactHome" onSubmit={submit}>

@@ -9,7 +9,9 @@ export default function Panel({data}) {
                 <div key={i} className="tarjetas">
                     <div className="panel">
                         <p className="rotate">{data.name}</p>
-                        <Tarjeta data={data.data}/>
+                        {data.data.map((data, i) =>
+                            <Tarjeta key={i} type={data.name} data={data}/>
+                        )}
                     </div>
                 </div>
             )}

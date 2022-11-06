@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 
 $webControllerIndex = [WebController::class, 'index'];
-$webControllerSearch = [WebController::class, 'search'];
+$webControllerFeeds = [WebController::class, 'feeds'];
+$webControllerFeed = [WebController::class, 'feed'];
 $webControllerSearchPost = [WebController::class, 'searchPost'];
+$webControllerAbout = [WebController::class, 'about'];
+$webControllerContact = [WebController::class, 'contact'];
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +22,10 @@ $webControllerSearchPost = [WebController::class, 'searchPost'];
 */
 
 Route::get('/', $webControllerIndex)->name("index");
-Route::get('/about', [WebController::class, 'about'])->name("about");
-Route::get('/contact', [WebController::class, 'contact'])->name("contact");
+Route::get('/search/{feed}', $webControllerFeeds)->name("feeds");
+Route::get('/search/{feed}/{id}', $webControllerFeed)->name("feed");
+Route::get('/about', $webControllerAbout)->name("about");
+Route::get('/contact', $webControllerContact)->name("contact");
 
 
 Route::post('/notify-owner', [WebController::class, 'mailOwner'])->name('notify-owner')

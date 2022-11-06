@@ -12,6 +12,7 @@ use Inertia\Inertia;
 
 class WebController extends Controller
 {
+    const FEEDTYPES = ['events', 'news', 'gallery'];
     const PURCHASE_COMPRAR = 1;
     const PURCHASE_ALQUILAR = 2;
     const PURCHASE_COMPARTIR = 3;
@@ -19,11 +20,47 @@ class WebController extends Controller
 
     public function index()
     {
-        $homeElements = [['name' => 'Noticias', "data" => [['name' => 'prueba', "desc" => "asdasdasdasdasd"],['name' => 'prueba', "desc" => "asdasdasdasdasd"],['name' => 'prueba', "desc" => "asdasdasdasdasd"],['name' => 'prueba', "desc" => "asdasdasdasdasd"]]], ['name' => 'Eventos', "data" => [['name' => 'prueba', "desc" => "asdasdasdasdasd"]]]];
+        $homeElements = [['name' => 'Noticias', "data" => [['name' => 'prueba', "desc" => "asdasdasdasdasd"], ['name' => 'prueba', "desc" => "asdasdasdasdasd"], ['name' => 'prueba', "desc" => "asdasdasdasdasd"], ['name' => 'prueba', "desc" => "asdasdasdasdasd"]]], ['name' => 'Eventos', "data" => [['name' => 'prueba', "desc" => "asdasdasdasdasd"]]]];
         return Inertia::render('Home', [
             'homeElements' => $homeElements
         ]);
     }
+
+    public function feeds($feed)
+    {
+
+        if ($this->checkFeed($feed)) {
+            //TODO case para ver cual necesito
+            return Inertia::render('Feed', [
+                'title' => $feed,
+                'data' => [['name' => 'prueba', "desc" => "asdasdasdasdasd"], ['name' => 'prueba', "desc" => "asdasdasdasdasd"]]
+            ]);
+
+        } else {
+            //TODO Pagina error
+        }
+    }
+
+    public function feed($feed, $id)
+    {
+
+        if ($this->checkFeed($feed)) {
+            //TODO case para ver cual necesito
+            return Inertia::render('FeedShow', [
+                'title' => $feed,
+            ]);
+
+        } else {
+            //TODO Pagina error
+        }
+    }
+
+    private function checkFeed($feed)
+    {
+        return in_array($feed, WebController::FEEDTYPES);
+    }
+
+    //____________________________________________________________________
 
     public function search()
     {
@@ -45,7 +82,7 @@ class WebController extends Controller
         ]);
     }
 
-    public function searchPost(Request $request)
+    public function searchPost()
     {
         $purchaseTypeList = HomePurchaseType::all();
         $homeTypeList = HomeType::all();

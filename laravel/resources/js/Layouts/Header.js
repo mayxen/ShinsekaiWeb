@@ -35,8 +35,17 @@ export default function Header() {
             </div>
             {!auth.user && (
                 <div className={'links'}>
+                    <Link href={route("feeds", 'gallery')}>
+                        Galerías
+                    </Link>
+                    <Link href={route("feeds", 'events')}>
+                        Eventos
+                    </Link>
+                    <Link href={route("feeds", 'news')}>
+                        Noticias
+                    </Link>
                     <Link href={route("login")}>
-                        login
+                        Login
                     </Link>
                 </div>
             )}
@@ -86,12 +95,6 @@ export default function Header() {
                             window.location.assign(route('index'))
                         }}>
                             <CottageIcon/> Inicio
-                        </MenuItem>
-
-                        <MenuItem onClick={() => {
-                            window.location.assign(route('profile'))
-                        }}>
-                            <AssignmentIndIcon/> Mi perfil
                         </MenuItem>
 
                         {auth.isAdmin && (
