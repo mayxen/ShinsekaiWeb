@@ -47,18 +47,21 @@ class AdminController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $licences = [];
         if ($request->isAdmin) {
-            $user->licenses()->attach(GlobalFunctions::IdLicenceAdmin);
+            $licences[] = GlobalFunctions::IdLicenceAdmin;
         }
         if ($request->isGallery) {
-            $user->licenses()->attach(GlobalFunctions::IdLicenceGallery);
+            $licences[] = GlobalFunctions::IdLicenceGallery;
         }
         if ($request->isEvent) {
-            $user->licenses()->attach(GlobalFunctions::IdLicenceEvent);
+            $licences[] = GlobalFunctions::IdLicenceEvent;
         }
         if ($request->isNew) {
-            $user->licenses()->attach(GlobalFunctions::IdLicenceNew);
+            $licences[] = GlobalFunctions::IdLicenceNew;
         }
+
+        $user->licenses()->attach($licences);
 
         return $this->getAllUsers();
     }
@@ -84,20 +87,22 @@ class AdminController extends Controller
         }
 
         $user->save();
-        //TODO Aquí se deberá poner un bucle con todos los ataches que hagan falta
         $user->licenses()->detach();
+        $licences = [];
         if ($request->isAdmin) {
-            $user->licenses()->attach(GlobalFunctions::IdLicenceAdmin);
+            $licences[] = GlobalFunctions::IdLicenceAdmin;
         }
         if ($request->isGallery) {
-            $user->licenses()->attach(GlobalFunctions::IdLicenceGallery);
+            $licences[] = GlobalFunctions::IdLicenceGallery;
         }
         if ($request->isEvent) {
-            $user->licenses()->attach(GlobalFunctions::IdLicenceEvent);
+            $licences[] = GlobalFunctions::IdLicenceEvent;
         }
         if ($request->isNew) {
-            $user->licenses()->attach(GlobalFunctions::IdLicenceNew);
+            $licences[] = GlobalFunctions::IdLicenceNew;
         }
+
+        $user->licenses()->attach($licences);
 
         return $this->getAllUsers();
     }
@@ -114,15 +119,14 @@ class AdminController extends Controller
     {
         $users = User::get(['id', 'name', 'email']);
 
-        //TODO esto falla y no me apetece mirarlo ahora
-//        foreach ($users as $user) {
-//            if (isset($user->licenses)) {
-//                $user['isAdmin'] = GlobalFunctions::checkUserHasLicence($user->licenses);
-//                $user['isGallery'] = GlobalFunctions::checkUserHasLicence($user->licenses, GlobalFunctions::LicenceGallery);
-//                $user['isEvent'] = GlobalFunctions::checkUserHasLicence($user->licenses, GlobalFunctions::LicenceEvent);
-//                $user['isNew'] = GlobalFunctions::checkUserHasLicence($user->licenses, GlobalFunctions::LicenceNew);
-//            }
-//        }
+        foreach ($users as $user) {
+            if (isset($user->licenses)) {
+                $user['isAdmin'] = GlobalFunctions::checkUserHasLicence($user->licenses);
+                $user['isGallery'] = GlobalFunctions::checkUserHasLicence($user->licenses, GlobalFunctions::LicenceGallery);
+                $user['isEvent'] = GlobalFunctions::checkUserHasLicence($user->licenses, GlobalFunctions::LicenceEvent);
+                $user['isNew'] = GlobalFunctions::checkUserHasLicence($user->licenses, GlobalFunctions::LicenceNew);
+            }
+        }
         return $users;
     }
 

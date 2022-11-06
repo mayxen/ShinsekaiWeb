@@ -1,7 +1,6 @@
 //icons
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-
 import * as React from 'react';
 import {useEffect, useState} from "react";
 import axios from "axios";
@@ -141,7 +140,7 @@ export default function ContentUser({data}) {
     }
 
     return (
-        <Paper sx={{maxWidth: 936, margin: 'auto', overflow: 'hidden'}}>
+        <Paper sx={{maxWidth: 1450, margin: 'auto', overflow: 'hidden'}}>
             <AppBar
                 position="static"
                 color="default"
