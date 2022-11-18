@@ -7,10 +7,11 @@ import Navigator from './Navigator';
 import ContentUser from "./ContentUser";
 import AdminHome from "./AdminHome";
 import Admin from "@/Layouts/Admin";
+import ContentNew from "@/Pages/Admin/ContentNew";
 
 const drawerWidth = 256;
 
-export default function Paperbase({users}) {
+export default function Paperbase({users, news}) {
     const [mobileOpen, setMobileOpen] = useState(false);
     const isSmUp = null;
 
@@ -44,6 +45,7 @@ export default function Paperbase({users}) {
                         <Routes>
                             <Route path='/admin/home' element={<AdminHome/>}/>
                             <Route path='/admin/users' element={<ContentUser data={users}/>}/>
+                            <Route path='/admin/new' element={<ContentNew data={news}/>}/>
                         </Routes>
                     </Box>
                 </Box>

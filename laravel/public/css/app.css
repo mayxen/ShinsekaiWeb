@@ -364,3 +364,17 @@ main {
 .about-title h1 {
   margin: 0 15px;
 }
+
+.row_deleted {
+  background-color: #b75c59;
+}
+.row_deleted:hover {
+  background-color: #b75c59 !important;
+}
+
+.row_not_visible {
+  background-color: #549cd7;
+}
+.row_not_visible:hover {
+  background-color: #549cd7 !important;
+}

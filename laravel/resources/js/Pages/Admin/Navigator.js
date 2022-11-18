@@ -48,6 +48,12 @@ export default function Navigator(props) {
                     active: false,
                     ruta: '/admin/users'
                 },
+                {
+                    id: 'News',
+                    icon: <PeopleIcon/>,
+                    active: false,
+                    ruta: '/admin/new'
+                },
             ]
         },
     ]);

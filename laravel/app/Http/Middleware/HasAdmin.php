@@ -20,7 +20,13 @@ class HasAdmin
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
-        if (!GlobalFunctions::checkUserHasLicence(Auth::user()->licenses)) {
+        //primero miro si hay user o guard 0
+        if (!is_object(Auth::user())) {
+            throw new AuthenticationException(
+                'no licence.', $guards, $this->redirectTo()
+            );
+        }
+        if (!GlobalFunctions::checkUserHasLicence(Auth::user()->licenses, $guards[0])) {
             throw new AuthenticationException(
                 'no licence.', $guards, $this->redirectTo()
             );

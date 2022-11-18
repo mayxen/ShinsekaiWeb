@@ -377,3 +377,17 @@ main {
         margin: 0 15px;
     }
 }
+
+.row_deleted {
+    background-color: $red;
+    &:hover {
+        background-color: $red !important;
+    }
+}
+
+.row_not_visible {
+    background-color: $blue;
+    &:hover {
+        background-color: $blue !important;;
+    }
+}

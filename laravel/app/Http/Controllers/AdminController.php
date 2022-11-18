@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\HomeImageResource;
 use App\Http\Resources\HomeResource;
+use App\Models\News;
 use App\Models\User;
 use Dnsimmons\Imager\Imager;
 use http\Exception;
@@ -17,12 +18,19 @@ use Inertia\Inertia;
 
 class AdminController extends Controller
 {
+    const NEW = "New";
+    const EVENT = "Event";
+    const GALLERY = "Gallery";
+    const ADMIN = "Admin";
+
     // Obtener todos los datos de cada vista
     public function indexPaperbase()
     {
         $users = $this->getAllUsers();
+        $news = News::all();
         return Inertia::render('Admin/Paperbase', [
             "users" => $users,
+            "news" => $news,
         ]);
     }
 
@@ -129,6 +137,83 @@ class AdminController extends Controller
         }
         return $users;
     }
+
+    ########### NOTICIAS ########################################
+
+    public function addNew(Request $request)
+    {
+        $newData = json_decode($request->new);
+        $uploadFile = $request->file('file');
+        $file_name = $uploadFile->hashName();
+        try {
+            if ($uploadFile) {
+                $imager = new Imager($uploadFile); //TODO cuando tengamos el icono poner la watermark
+//                $imager->watermark(storage_path("/app/public/watermark.png"), 'bottom-right')->write(storage_path("/app/public/$file_name"));
+                $imager->write(storage_path("/app/public/$file_name"));
+            }
+            News::create([
+                'title' => $newData->title,
+                'resume' => $newData->resume,
+                'description' => $newData->description,
+                'visible' => $newData->visible,
+                'image' => $file_name,
+            ]);
+
+            return News::all();
+        } catch (Exception $e) {
+            Storage::disk('public')->delete("/app/public/$file_name");
+            return response()->json(['error' => "Hubo un error en la subida por {
+                $e->getMessage()}"]);
+        }
+    }
+
+    public function updateNew(Request $request, $id)
+    {
+        $uploadFile = $request->file('file');
+        $new = News::find($id);
+        try {
+            if ($uploadFile) {
+                $file_name = $uploadFile->hashName();
+                Storage::disk('public')->delete($new->image);
+                $imager = new Imager($uploadFile); //TODO cuando tengamos el icono poner la watermark
+//                $imager->watermark(storage_path("/app/public/watermark.png"), 'bottom-right')->write(storage_path("/app/public/$file_name"));
+                $imager->write(storage_path("/app/public/$file_name"));
+                $new->image = $file_name;
+            }
+            $newData = json_decode($request->new);
+            $new->title = $newData->title;
+            $new->resume = $newData->resume;
+            $new->description = $newData->description;
+            $new->visible = $newData->visible;
+            $new->save();
+
+            return News::all();
+        } catch (Exception $e) {
+            return response()->json(['error' => "Hubo un error en la subida por {
+                $e->getMessage()}"]);
+        }
+    }
+
+    public function deleteNew($id)
+    {
+        $new = News::find($id);
+        $new->delete();
+        return response()->json($new);
+    }
+
+    public function trueDeleteNew($id)
+    {
+        $new = News::withTrashed()->find($id);
+        Storage::disk('public')->delete($new->image);
+        $new->forceDelete();
+        return response()->json($new);
+    }
+
+    public function toggleTrashedNew(Request $request)
+    {
+        return $request->isWithTrashed ? News::withTrashed()->get() : News::all();
+    }
+
 
     ########### HOME TYPES ########################################
 

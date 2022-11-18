@@ -43,6 +43,8 @@ class GlobalFunctions
     public static function checkUserHasLicence($licenses, $licenseName = "Admin")
     {
         foreach ($licenses as $license) {
+            if ($license->license === "Admin")
+                return true;
             if ($license->license === $licenseName)
                 return true;
         }
