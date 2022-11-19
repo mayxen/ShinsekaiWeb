@@ -54,6 +54,12 @@ export default function Navigator(props) {
                     active: false,
                     ruta: '/admin/new'
                 },
+                {
+                    id: 'Events',
+                    icon: <PeopleIcon/>,
+                    active: false,
+                    ruta: '/admin/event'
+                },
             ]
         },
     ]);

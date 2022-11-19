@@ -9,4 +9,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class LocalEvent extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'title',
+        'visible',
+        'description',
+        'resume',
+        'image',
+    ];
+
+    protected $casts = [
+        'visible' => 'boolean',
+    ];
 }

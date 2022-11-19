@@ -21,6 +21,7 @@ class CreateLocalEventsTable extends Migration
             $table->string("image");
             $table->boolean("visible");
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 

@@ -50,4 +50,12 @@ Route::prefix('admin')->group(function () {
     Route::put('/new_update/{id}', [AdminController::class, "updateNew"])->middleware(['HasAdmin:New']);
     Route::post('/new_update/{id}', [AdminController::class, "updateNew"])->middleware(['HasAdmin:New']);
     Route::post('/new_trashed', [AdminController::class, "toggleTrashedNew"])->middleware(['HasAdmin:New']);
+
+    //EVENT
+    Route::get('/event', $indexAdminController)->name("admin_event")->middleware(['HasAdmin:Event']);
+    Route::delete('/event_delete/{id}', [AdminController::class, "deleteEvent"])->middleware(['HasAdmin:Event']);
+    Route::delete('/event_true_delete/{id}', [AdminController::class, "trueDeleteEvent"])->middleware(['HasAdmin:Event']);
+    Route::post('/event_add', [AdminController::class, "addEvent"])->middleware(['HasAdmin:Event']);
+    Route::post('/event_update/{id}', [AdminController::class, "updateEvent"])->middleware(['HasAdmin:Event']);
+    Route::post('/event_trashed', [AdminController::class, "toggleTrashedEvent"])->middleware(['HasAdmin:Event']);
 });

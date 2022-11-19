@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\HomeImageResource;
 use App\Http\Resources\HomeResource;
+use App\Models\LocalEvent;
 use App\Models\News;
 use App\Models\User;
 use Dnsimmons\Imager\Imager;
@@ -28,9 +29,11 @@ class AdminController extends Controller
     {
         $users = $this->getAllUsers();
         $news = News::all();
+        $events = LocalEvent::all();
         return Inertia::render('Admin/Paperbase', [
             "users" => $users,
             "news" => $news,
+            "events" => $events,
         ]);
     }
 
@@ -214,8 +217,82 @@ class AdminController extends Controller
         return $request->isWithTrashed ? News::withTrashed()->get() : News::all();
     }
 
+    ########### EVENT ########################################
+    public function addEvent(Request $request)
+    {
+        $eventData = json_decode($request->localEvent);
+        $uploadFile = $request->file('file');
+        $file_name = $uploadFile->hashName();
+        try {
+            if ($uploadFile) {
+                $imager = new Imager($uploadFile); //TODO cuando tengamos el icono poner la watermark
+//                $imager->watermark(storage_path("/app/public/watermark.png"), 'bottom-right')->write(storage_path("/app/public/$file_name"));
+                $imager->write(storage_path("/app/public/$file_name"));
+            }
+            LocalEvent::create([
+                'title' => $eventData->title,
+                'resume' => $eventData->resume,
+                'description' => $eventData->description,
+                'visible' => $eventData->visible,
+                'image' => $file_name,
+            ]);
 
-    ########### HOME TYPES ########################################
+            return LocalEvent::all();
+        } catch (Exception $e) {
+            Storage::disk('public')->delete("/app/public/$file_name");
+            return response()->json(['error' => "Hubo un error en la subida por {
+                $e->getMessage()}"]);
+        }
+    }
+
+    public function updateEvent(Request $request, $id)
+    {
+        $uploadFile = $request->file('file');
+        $event = LocalEvent::find($id);
+        try {
+            if ($uploadFile) {
+                $file_name = $uploadFile->hashName();
+                Storage::disk('public')->delete($event->image);
+                $imager = new Imager($uploadFile); //TODO cuando tengamos el icono poner la watermark
+//                $imager->watermark(storage_path("/app/public/watermark.png"), 'bottom-right')->write(storage_path("/app/public/$file_name"));
+                $imager->write(storage_path("/app/public/$file_name"));
+                $event->image = $file_name;
+            }
+            $eventData = json_decode($request->localEvent);
+            $event->title = $eventData->title;
+            $event->resume = $eventData->resume;
+            $event->description = $eventData->description;
+            $event->visible = $eventData->visible;
+            $event->save();
+
+            return LocalEvent::all();
+        } catch (Exception $e) {
+            return response()->json(['error' => "Hubo un error en la subida por {
+                $e->getMessage()}"]);
+        }
+    }
+
+    public function deleteEvent($id)
+    {
+        $event = LocalEvent::find($id);
+        $event->delete();
+        return response()->json($event);
+    }
+
+    public function trueDeleteEvent($id)
+    {
+        $event = LocalEvent::withTrashed()->find($id);
+        Storage::disk('public')->delete($event->image);
+        $event->forceDelete();
+        return response()->json($event);
+    }
+
+    public function toggleTrashedEvent(Request $request)
+    {
+        return $request->isWithTrashed ? LocalEvent::withTrashed()->get() : LocalEvent::all();
+    }
+
+    ########### END EVENT ########################################
 
     // Añadir un nuevo tipo de casa
     public function addHomeType(Request $request)

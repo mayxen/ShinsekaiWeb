@@ -8,10 +8,11 @@ import ContentUser from "./ContentUser";
 import AdminHome from "./AdminHome";
 import Admin from "@/Layouts/Admin";
 import ContentNew from "@/Pages/Admin/ContentNew";
+import ContentEvent from "@/Pages/Admin/ContentEvent";
 
 const drawerWidth = 256;
 
-export default function Paperbase({users, news}) {
+export default function Paperbase({users, news, events}) {
     const [mobileOpen, setMobileOpen] = useState(false);
     const isSmUp = null;
 
@@ -46,6 +47,7 @@ export default function Paperbase({users, news}) {
                             <Route path='/admin/home' element={<AdminHome/>}/>
                             <Route path='/admin/users' element={<ContentUser data={users}/>}/>
                             <Route path='/admin/new' element={<ContentNew data={news}/>}/>
+                            <Route path='/admin/event' element={<ContentEvent data={events}/>}/>
                         </Routes>
                     </Box>
                 </Box>

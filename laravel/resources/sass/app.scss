@@ -386,8 +386,8 @@ main {
 }
 
 .row_not_visible {
-    background-color: $blue;
+    background-color: $orange;
     &:hover {
-        background-color: $blue !important;;
+        background-color: $orange !important;;
     }
 }

@@ -373,8 +373,8 @@ main {
 }
 
 .row_not_visible {
-  background-color: #549cd7;
+  background-color: #f6993f;
 }
 .row_not_visible:hover {
-  background-color: #549cd7 !important;
+  background-color: #f6993f !important;
 }
