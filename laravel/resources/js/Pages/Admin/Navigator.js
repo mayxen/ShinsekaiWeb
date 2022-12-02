@@ -9,6 +9,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import AnnouncementIcon from '@mui/icons-material/Announcement';
+import EventIcon from '@mui/icons-material/Event';
+import CollectionsIcon from '@mui/icons-material/Collections';
 
 // icons
 import HomeIcon from '@mui/icons-material/Home';
@@ -49,16 +52,22 @@ export default function Navigator(props) {
                     ruta: '/admin/users'
                 },
                 {
-                    id: 'News',
-                    icon: <PeopleIcon/>,
+                    id: 'Noticias',
+                    icon: <AnnouncementIcon/>,
                     active: false,
                     ruta: '/admin/new'
                 },
                 {
-                    id: 'Events',
-                    icon: <PeopleIcon/>,
+                    id: 'Eventos',
+                    icon: <EventIcon/>,
                     active: false,
                     ruta: '/admin/event'
+                },
+                {
+                    id: 'Galería',
+                    icon: <CollectionsIcon/>,
+                    active: false,
+                    ruta: '/admin/gallery'
                 },
             ]
         },

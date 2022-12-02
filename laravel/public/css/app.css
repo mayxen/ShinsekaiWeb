@@ -378,3 +378,17 @@ main {
 .row_not_visible:hover {
   background-color: #f6993f !important;
 }
+
+.modalImage {
+  width: 150px;
+}
+
+.closeButton {
+  background-color: #000000;
+  border-radius: 50%;
+  color: #b75c59;
+  padding: 3px;
+  position: relative;
+  left: 160px;
+  cursor: pointer;
+}

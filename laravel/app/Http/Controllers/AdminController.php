@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\HomeImageResource;
-use App\Http\Resources\HomeResource;
+use App\Http\Resources\GalleryResource;
+use App\Models\Gallery;
+use App\Models\GalleryImage;
 use App\Models\LocalEvent;
 use App\Models\News;
 use App\Models\User;
@@ -30,10 +32,12 @@ class AdminController extends Controller
         $users = $this->getAllUsers();
         $news = News::all();
         $events = LocalEvent::all();
+        $galleries = $this->getGallery();
         return Inertia::render('Admin/Paperbase', [
             "users" => $users,
             "news" => $news,
             "events" => $events,
+            "galleries" => $galleries,
         ]);
     }
 
@@ -293,7 +297,114 @@ class AdminController extends Controller
     }
 
     ########### END EVENT ########################################
+    ########### GALLERY ########################################
 
+    public function addGallery(Request $request)
+    {
+        $galleryData = json_decode($request->Gallery);
+        $uploadFiles = $request->allFiles();
+        $gallery = Gallery::create([
+            'title' => $galleryData->title,
+            'resume' => $galleryData->resume,
+            'description' => $galleryData->description,
+            'visible' => $galleryData->visible,
+            'eventDate' => $galleryData->date,
+        ]);
+        try {
+            if ($uploadFiles) {
+                foreach ($uploadFiles as $uploadFile) {
+                    $file_name = $uploadFile->hashName();
+                    $imager = new Imager($uploadFile); //TODO cuando tengamos el icono poner la watermark
+                    //                $imager->watermark(storage_path("/app/public/watermark.png"), 'bottom-right')->write(storage_path("/app/public/$file_name"));
+                    $imager->write(storage_path("/app/public/$file_name"));
+                    GalleryImage::create([
+                        'url' => $file_name,
+                        'galleries_id' => $gallery->id,
+                        'visible' => true,
+                    ]);
+                }
+            }
+
+            return $this->getGallery();
+        } catch (Exception $e) {
+            return response()->json(['error' => "Hubo un error en la subida por {
+                $e->getMessage()}"]);
+        }
+    }
+
+    public function updateGallery(Request $request, $id)
+    {
+        $uploadFiles = $request->allFiles();
+        $gallery = Gallery::find($id);
+        try {
+            if ($uploadFiles) {
+                foreach ($uploadFiles as $uploadFile) {
+                    $file_name = $uploadFile->hashName();
+                    $imager = new Imager($uploadFile); //TODO cuando tengamos el icono poner la watermark
+                    //                $imager->watermark(storage_path("/app/public/watermark.png"), 'bottom-right')->write(storage_path("/app/public/$file_name"));
+                    $imager->write(storage_path("/app/public/$file_name"));
+                    GalleryImage::create([
+                        'url' => $file_name,
+                        'galleries_id' => $gallery->id,
+                        'visible' => true,
+                    ]);
+                }
+
+                $gallery->image = $file_name;
+            }
+            $galleryData = json_decode($request->Gallery);
+            $gallery->title = $galleryData->title;
+            $gallery->resume = $galleryData->resume;
+            $gallery->description = $galleryData->description;
+            $gallery->visible = $galleryData->visible;
+            $gallery->eventDate = $galleryData->date;
+            $gallery->save();
+
+            return $this->getGallery();
+        } catch (Exception $e) {
+            return response()->json(['error' => "Hubo un error en la subida por {
+                $e->getMessage()}"]);
+        }
+    }
+
+    public function deleteGallery($id)
+    {
+        $gallery = Gallery::find($id);
+        $gallery->delete();
+        return response()->json($gallery);
+    }
+
+    public function trueDeleteGallery($id)
+    {
+        $gallery = Gallery::withTrashed()->find($id);
+        foreach ($gallery->images as $image) {
+            Storage::disk('public')->delete($image->url);
+            $image->forceDelete();
+        }
+
+        $gallery->forceDelete();
+        return response()->json($gallery);
+    }
+
+    public function toggleTrashedGallery(Request $request)
+    {
+        return $request->isWithTrashed ? $this->getGallery(true) : $this->getGallery();
+    }
+
+    private function getGallery($withTrashed = false)
+    {
+        return $withTrashed ? GalleryResource::collection(Gallery::withTrashed()->get()) : GalleryResource::collection(Gallery::all());
+    }
+
+    public function deleteGalleryImage($id)
+    {
+        $image = GalleryImage::find($id);
+        Storage::disk('public')->delete($image->url);
+        $image->forceDelete();
+        return response()->json($image);
+    }
+
+    ########### END GALLERY ########################################
     // Añadir un nuevo tipo de casa
     public function addHomeType(Request $request)
     {
@@ -358,7 +469,7 @@ class AdminController extends Controller
     // Obtener casas después de añadir una nueva
     public function getHomes()
     {
-        $homes = HomeResource::collection(Home::all());
+        $homes = GalleryResource::collection(Home::all());
         return $homes;
     }
 
@@ -501,7 +612,7 @@ class AdminController extends Controller
             $userAuth = Auth::user();
             GlobalFunctions::createLog("$userAuth->name ha modificado la casa $home->title(id - $home->id)", $userAuth->id);
 
-            $homes = HomeResource::collection(Home::all());;
+            $homes = GalleryResource::collection(Home::all());;
             return $homes;
         } catch (Exception $e) {
             DB::rollBack();
@@ -554,7 +665,7 @@ class AdminController extends Controller
             $home->delete();
         }
 
-        $homes = HomeResource::collection(Home::all());;
+        $homes = GalleryResource::collection(Home::all());;
         return $homes;
     }
 

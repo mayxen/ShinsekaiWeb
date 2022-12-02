@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\HomeResource;
+use App\Http\Resources\GalleryResource;
 use App\Mail\NotifyOwner;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -67,9 +67,9 @@ class WebController extends Controller
         $purchaseTypeList = HomePurchaseType::all();
         $homeTypeList = HomeType::all();
         $cities = City::all()->sortBy("name")->pluck("name");
-        $homeAlt = HomeResource::collection(Home::InRandomOrder()->take(6)->get());
+        $homeAlt = GalleryResource::collection(Home::InRandomOrder()->take(6)->get());
         $data = Home::inRandomOrder()->get();
-        $dataResult = HomeResource::collection($data->take($this::SKIP_TOTAL));
+        $dataResult = GalleryResource::collection($data->take($this::SKIP_TOTAL));
 
         return Inertia::render('Search', [
             'purchaseTypeList' => $purchaseTypeList,
@@ -91,10 +91,10 @@ class WebController extends Controller
         $location = $request->location;
         $cities = City::all()->sortBy("name")->pluck("name");
         $data = $this->searchFilterHomes($request);
-        $paginatedData = HomeResource::collection($data
+        $paginatedData = GalleryResource::collection($data
             ->skip($request->page ? ($request->page - 1) * $this::SKIP_TOTAL : 0)
             ->take($this::SKIP_TOTAL));
-        $homeAlt = HomeResource::collection(Home::InRandomOrder()->take(6)->get());
+        $homeAlt = GalleryResource::collection(Home::InRandomOrder()->take(6)->get());
 
         return Inertia::render('Search', [
             'purchaseTypeList' => $purchaseTypeList,
@@ -195,13 +195,13 @@ class WebController extends Controller
     {
         switch ($type) {
             case $this::PURCHASE_COMPRAR:
-                return HomeResource::collection(Home::where('home_purchase_type_id', $this::PURCHASE_COMPRAR)
+                return GalleryResource::collection(Home::where('home_purchase_type_id', $this::PURCHASE_COMPRAR)
                     ->orderBy('home_purchase_type_id', 'desc')->take(6)->get());
             case $this::PURCHASE_ALQUILAR:
-                return HomeResource::collection(Home::where('home_purchase_type_id', $this::PURCHASE_ALQUILAR)
+                return GalleryResource::collection(Home::where('home_purchase_type_id', $this::PURCHASE_ALQUILAR)
                     ->orderBy('home_purchase_type_id', 'desc')->take(6)->get());
             case $this::PURCHASE_COMPARTIR:
-                return HomeResource::collection(Home::where('home_purchase_type_id', $this::PURCHASE_COMPARTIR)
+                return GalleryResource::collection(Home::where('home_purchase_type_id', $this::PURCHASE_COMPARTIR)
                     ->orderBy('home_purchase_type_id', 'desc')->take(6)->get());
         }
     }

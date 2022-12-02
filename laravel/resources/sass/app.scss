@@ -380,6 +380,7 @@ main {
 
 .row_deleted {
     background-color: $red;
+
     &:hover {
         background-color: $red !important;
     }
@@ -387,7 +388,22 @@ main {
 
 .row_not_visible {
     background-color: $orange;
+
     &:hover {
         background-color: $orange !important;;
     }
+}
+
+.modalImage {
+    width: 150px;
+}
+
+.closeButton {
+    background-color: $black;
+    border-radius: 50%;
+    color: $red;
+    padding: 3px;
+    position: relative;
+    left: 160px;
+    cursor: pointer;
 }

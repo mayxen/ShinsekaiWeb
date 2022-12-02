@@ -9,13 +9,13 @@ import AdminHome from "./AdminHome";
 import Admin from "@/Layouts/Admin";
 import ContentNew from "@/Pages/Admin/ContentNew";
 import ContentEvent from "@/Pages/Admin/ContentEvent";
+import ContentGallery from "@/Pages/Admin/ContentGallery";
 
 const drawerWidth = 256;
 
-export default function Paperbase({users, news, events}) {
+export default function Paperbase({users, news, events, galleries}) {
     const [mobileOpen, setMobileOpen] = useState(false);
     const isSmUp = null;
-
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -48,6 +48,7 @@ export default function Paperbase({users, news, events}) {
                             <Route path='/admin/users' element={<ContentUser data={users}/>}/>
                             <Route path='/admin/new' element={<ContentNew data={news}/>}/>
                             <Route path='/admin/event' element={<ContentEvent data={events}/>}/>
+                            <Route path='/admin/gallery' element={<ContentGallery data={galleries.data}/>}/>
                         </Routes>
                     </Box>
                 </Box>

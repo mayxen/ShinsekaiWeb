@@ -15,9 +15,9 @@ class CreateGalleryImagesTable extends Migration
     {
         Schema::create('gallery_images', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
-            $table->string("resume", 100);
-            $table->string("description", 10000);
+            $table->string("title")->nullable();
+            $table->string("resume", 100)->nullable();
+            $table->string("description", 10000)->nullable();
             $table->string("url");
             $table->foreignId('galleries_id')->constrained()->cascadeOnDelete();
             $table->boolean("visible");
