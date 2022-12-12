@@ -20,6 +20,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import Dialog from "@mui/material/Dialog";
 import ModalGallery from "@/Pages/Admin/ModalGallery";
+import RestoreIcon from "@mui/icons-material/Restore";
 
 export default function ContentGallery({data}) {
     const [gallery, setGallery] = useState(data);
@@ -77,6 +78,14 @@ export default function ContentGallery({data}) {
                         setIsTrueDelete(true);
                         setGalleryDelete(params.row);
                         setOpenAlert(true);
+                    }}
+                />,
+                <GridActionsCellItem
+                    icon={<RestoreIcon/>}
+                    label="restore"
+                    style={{display: withTrashedButton ? '' : 'none', 'color': 'red'}}
+                    onClick={() => {
+                        restoreEvent(params.row.id);
                     }}
                 />
             ],
@@ -147,6 +156,14 @@ export default function ContentGallery({data}) {
             });
         });
         setGallery(filteredRows);
+    }
+
+    const restoreEvent = (id) => {
+        axios.delete(`/admin/gallery_restore/${id}`)
+            .then(res => {
+                alert("restaurado!");
+            })
+            .catch(e => console.log('FALLO EN DELETE', e));
     }
 
     return (

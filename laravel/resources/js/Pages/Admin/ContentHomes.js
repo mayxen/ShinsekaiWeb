@@ -321,8 +321,8 @@ export default function ContentHomes({data, hometypes, homepurchasetypes, cities
                         disableColumnMenu={true}
                         rows={homes}
                         columns={columns}
-                        pageSize={10}
-                        rowsPerPageOptions={[10]}
+                        pageSize={15}
+                        rowsPerPageOptions={[15]}
                         disableSelectionOnClick
                     />
                 </div>

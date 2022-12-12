@@ -67,8 +67,6 @@ export default function HomeAlternative(props) {
                     });
                 })
                 .catch(e =>
-                    // enqueueSnackbar("Has sobrepasado el número de mensajes por minuto permitido para esta cuenta." +
-                    //     " Por favor, espera antes de mandar más mensajes", {variant: "warning", autoHideDuration: 3000})
                     enqueueSnackbar("El propietario se pondrá en contacto con usted pronto", {
                         variant: "success",
                         autoHideDuration: 3000

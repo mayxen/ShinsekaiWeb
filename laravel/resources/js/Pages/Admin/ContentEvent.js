@@ -1,6 +1,9 @@
 //icons
 import EditIcon from "@mui/icons-material/Edit";
+import RestoreIcon from '@mui/icons-material/Restore';
 import DeleteIcon from "@mui/icons-material/Delete";
+import SearchIcon from '@mui/icons-material/Search';
+
 import * as React from 'react';
 import {useEffect, useState} from "react";
 import axios from "axios";
@@ -11,16 +14,13 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
-import SearchIcon from '@mui/icons-material/Search';
 import Button from "@mui/material/Button";
-import ModalUser from "./ModalUser";
 import {Alert, FormControl, FormControlLabel, FormGroup, Snackbar, Switch} from "@mui/material";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import Dialog from "@mui/material/Dialog";
-import ModalNew from "@/Pages/Admin/ModalNew";
 import ModalEvent from "@/Pages/Admin/ModalEvent";
 
 export default function ContentEvent({data}) {
@@ -80,6 +80,14 @@ export default function ContentEvent({data}) {
                         setEventDelete(params.row);
                         setOpenAlert(true);
                     }}
+                />,
+                <GridActionsCellItem
+                    icon={<RestoreIcon/>}
+                    label="restore"
+                    style={{display: withTrashedButton ? '' : 'none', 'color': 'red'}}
+                    onClick={() => {
+                        restoreEvent(params.row.id);
+                    }}
                 />
             ],
         }
@@ -122,6 +130,14 @@ export default function ContentEvent({data}) {
                 )
                 setEventDelete({});
                 setOpenAlert(false);
+            })
+            .catch(e => console.log('FALLO EN DELETE', e));
+    }
+
+    const restoreEvent = (id) => {
+        axios.delete(`/admin/event_restore/${id}`)
+            .then(res => {
+                alert("restaurado!");
             })
             .catch(e => console.log('FALLO EN DELETE', e));
     }

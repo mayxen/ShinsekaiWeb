@@ -21,6 +21,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import Dialog from "@mui/material/Dialog";
 import ModalNew from "@/Pages/Admin/ModalNew";
+import RestoreIcon from "@mui/icons-material/Restore";
 
 export default function ContentNew({data}) {
     const [news, setNews] = useState(data);
@@ -79,10 +80,26 @@ export default function ContentNew({data}) {
                         setNewDelete(params.row);
                         setOpenAlert(true);
                     }}
+                />,
+                <GridActionsCellItem
+                    icon={<RestoreIcon/>}
+                    label="restore"
+                    style={{display: withTrashedButton ? '' : 'none', 'color': 'red'}}
+                    onClick={() => {
+                        restoreEvent(params.row.id);
+                    }}
                 />
             ],
         }
     ];
+
+    const restoreEvent = (id) => {
+        axios.delete(`/admin/new_restore/${id}`)
+            .then(res => {
+                alert("restaurado!");
+            })
+            .catch(e => console.log('FALLO EN DELETE', e));
+    }
 
     const handleEditClick = (id) => {
         setType("Editar");

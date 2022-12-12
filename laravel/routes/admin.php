@@ -45,6 +45,7 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/new', $indexAdminController)->name("admin_new")->middleware(['HasAdmin:New']);
     Route::delete('/new_delete/{id}', [AdminController::class, "deleteNew"])->middleware(['HasAdmin:New']);
     Route::delete('/new_true_delete/{id}', [AdminController::class, "trueDeleteNew"])->middleware(['HasAdmin:New']);
+    Route::delete('/new_restore/{id}', [AdminController::class, "restoreNew"])->middleware(['HasAdmin:New']);
     Route::post('/new_add', [AdminController::class, "addNew"])->middleware(['HasAdmin:New']);
     Route::post('/new_update/{id}', [AdminController::class, "updateNew"])->middleware(['HasAdmin:New']);
     Route::post('/new_trashed', [AdminController::class, "toggleTrashedNew"])->middleware(['HasAdmin:New']);
@@ -52,6 +53,7 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     //EVENT
     Route::get('/event', $indexAdminController)->name("admin_event")->middleware(['HasAdmin:Event']);
     Route::delete('/event_delete/{id}', [AdminController::class, "deleteEvent"])->middleware(['HasAdmin:Event']);
+    Route::delete('/event_restore/{id}', [AdminController::class, "restoreEvent"])->middleware(['HasAdmin:Event']);
     Route::delete('/event_true_delete/{id}', [AdminController::class, "trueDeleteEvent"])->middleware(['HasAdmin:Event']);
     Route::post('/event_add', [AdminController::class, "addEvent"])->middleware(['HasAdmin:Event']);
     Route::post('/event_update/{id}', [AdminController::class, "updateEvent"])->middleware(['HasAdmin:Event']);
@@ -60,6 +62,7 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     //GALLERY
     Route::get('/gallery', $indexAdminController)->name("admin_gallery")->middleware(['HasAdmin:Gallery']);
     Route::delete('/gallery_delete/{id}', [AdminController::class, "deleteGallery"])->middleware(['HasAdmin:Gallery']);
+    Route::delete('/gallery_restore/{id}', [AdminController::class, "restoreGallery"])->middleware(['HasAdmin:Gallery']);
     Route::delete('/gallery_true_delete/{id}', [AdminController::class, "trueDeleteGallery"])->middleware(['HasAdmin:Gallery']);
     Route::delete('/gallery_image_delete/{id}', [AdminController::class, "deleteGalleryImage"])->middleware(['HasAdmin:Gallery']);
     Route::post('/gallery_add', [AdminController::class, "addGallery"])->middleware(['HasAdmin:Gadllery']);

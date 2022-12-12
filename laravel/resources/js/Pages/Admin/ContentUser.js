@@ -204,8 +204,8 @@ export default function ContentUser({data}) {
                         disableColumnMenu={true}
                         rows={users}
                         columns={columns}
-                        pageSize={5}
-                        rowsPerPageOptions={[5]}
+                        pageSize={20}
+                        rowsPerPageOptions={[20]}
                         disableSelectionOnClick
                     />
                 </div>

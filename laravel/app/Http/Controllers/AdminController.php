@@ -208,6 +208,13 @@ class AdminController extends Controller
         return response()->json($new);
     }
 
+    public function restoreNew($id)
+    {
+        $new = News::withTrashed()->find($id);
+        $new->restore();
+        return response()->json($new);
+    }
+
     public function trueDeleteNew($id)
     {
         $new = News::withTrashed()->find($id);
@@ -283,11 +290,19 @@ class AdminController extends Controller
         return response()->json($event);
     }
 
+
     public function trueDeleteEvent($id)
     {
         $event = LocalEvent::withTrashed()->find($id);
         Storage::disk('public')->delete($event->image);
         $event->forceDelete();
+        return response()->json($event);
+    }
+
+    public function restoreEvent($id)
+    {
+        $event = LocalEvent::withTrashed()->find($id);
+        $event->restore();
         return response()->json($event);
     }
 
@@ -371,6 +386,13 @@ class AdminController extends Controller
     {
         $gallery = Gallery::find($id);
         $gallery->delete();
+        return response()->json($gallery);
+    }
+
+    public function restoreGallery($id)
+    {
+        $gallery = Gallery::withTrashed()->find($id);
+        $gallery->restore();
         return response()->json($gallery);
     }
 
