@@ -59,6 +59,9 @@ class AdminController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'birthDate' => $request->birthDate,
+            'address' => $request->address,
             'password' => Hash::make($request->password),
         ]);
 
@@ -97,6 +100,9 @@ class AdminController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->phone_number = $request->phone_number;
+        $user->birthDate = $request->birthDate;
+        $user->address = $request->address;
         if ($request->password != "") {
             $user->password = Hash::make($request->password);
         }
@@ -132,7 +138,7 @@ class AdminController extends Controller
 
     private function getAllUsers()
     {
-        $users = User::get(['id', 'name', 'email']);
+        $users = User::all();
 
         foreach ($users as $user) {
             if (isset($user->licenses)) {
@@ -245,6 +251,7 @@ class AdminController extends Controller
                 'resume' => $eventData->resume,
                 'description' => $eventData->description,
                 'visible' => $eventData->visible,
+                'eventDate' => $eventData->date,
                 'image' => $file_name,
             ]);
 
@@ -274,6 +281,7 @@ class AdminController extends Controller
             $event->resume = $eventData->resume;
             $event->description = $eventData->description;
             $event->visible = $eventData->visible;
+            $event->eventDate = $eventData->date;
             $event->save();
 
             return LocalEvent::all();

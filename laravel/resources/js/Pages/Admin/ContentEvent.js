@@ -44,6 +44,12 @@ export default function ContentEvent({data}) {
             editable: true,
         },
         {
+            field: 'eventDate',
+            headerName: 'Fecha',
+            width: 150,
+            editable: true,
+        },
+        {
             field: 'visible',
             headerName: 'Visible',
             width: 150,
@@ -103,6 +109,7 @@ export default function ContentEvent({data}) {
                     resume: oneNew[0].resume,
                     description: oneNew[0].description,
                     visible: oneNew[0].visible,
+                    date: oneNew[0].date,
                     image: oneNew[0].image,
                 }
             }
@@ -219,6 +226,7 @@ export default function ContentEvent({data}) {
                                             resume: "",
                                             image: "",
                                             description: "",
+                                            date: "",
                                             visible: false,
                                         }
                                     }

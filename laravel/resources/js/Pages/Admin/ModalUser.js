@@ -11,6 +11,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import ToggleButton from '@mui/material/ToggleButton';
+import {InputLabel} from "@mui/material";
+import {DatePicker} from "@mui/lab";
+import Grid from "@mui/material/Grid";
 
 export default function ModalUser({setUsers, open, setOpen, type, user, setUser, setUsersAux, setToastOpen}) {
     const [Adminselected, setAdminselected] = useState(false);
@@ -71,7 +74,7 @@ export default function ModalUser({setUsers, open, setOpen, type, user, setUser,
     function validateUser() {
         if (userNameIsEmpty()) return false;
         if (emailIsEmpty()) return false;
-        return !passwordIsEmpty();
+        return true;
     }
 
     function checkErrorOriginAndGiveFeedback(e) {
@@ -96,6 +99,9 @@ export default function ModalUser({setUsers, open, setOpen, type, user, setUser,
                             name: "",
                             email: "",
                             password: "",
+                            address: "",
+                            birthDate: "",
+                            phone_number: "",
                             isAdmin: false,
                             isGallery: false,
                             isEvent: false,
@@ -123,6 +129,9 @@ export default function ModalUser({setUsers, open, setOpen, type, user, setUser,
                             name: "",
                             email: "",
                             password: "",
+                            address: "",
+                            birthDate: "",
+                            phone_number: "",
                             isAdmin: false,
                             isGallery: false,
                             isEvent: false,
@@ -189,6 +198,56 @@ export default function ModalUser({setUsers, open, setOpen, type, user, setUser,
                     }}
                 />
 
+                <TextField
+                    margin="dense"
+                    name="phone_number"
+                    label="Teléfono"
+                    placeholder="671 000 000"
+                    type="text"
+                    fullWidth
+                    variant="standard"
+                    value={user.phone_number}
+                    onChange={(e) => {
+                        setUser({
+                            ...user,
+                            phone_number: e.target.value
+                        });
+                    }}
+                />
+
+                <TextField
+                    margin="dense"
+                    name="address"
+                    label="Dirección"
+                    placeholder="Calle X"
+                    type="text"
+                    fullWidth
+                    helperText={userNameHelperText}
+                    variant="standard"
+                    value={user.address}
+                    onChange={(e) => {
+                        setUser({
+                            ...user,
+                            address: e.target.value
+                        });
+                    }}
+                />
+
+                <Grid item>
+                    <InputLabel>Fecha de cumpleaños</InputLabel>
+                    <DatePicker
+                        views={['year', "month", "day"]}
+                        id="date"
+                        value={user.birthDate}
+                        onChange={(newValue) => {
+                            setUser({
+                                ...user,
+                                birthDate: newValue.format('YYYY/MM/DD')
+                            });
+                        }}
+                        renderInput={(params) => <TextField {...params} helperText={null}/>}
+                    />
+                </Grid>
                 {/*password*/}
                 <TextField
                     margin="dense"

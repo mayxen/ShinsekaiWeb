@@ -33,7 +33,7 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     });
 
     // Admin HomeAlternative princiapl
-    Route::get('/home', $indexAdminController)->name("admin_homes");
+    Route::get('/home', $indexAdminController)->name("admin_home");
 
     //USUARIOS
     Route::get('/users', $indexAdminController)->name("admin_users")->middleware(['HasAdmin:User']);

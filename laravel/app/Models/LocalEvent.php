@@ -16,6 +16,7 @@ class LocalEvent extends Model
         'description',
         'resume',
         'image',
+        'eventDate',
     ];
 
     protected $casts = [

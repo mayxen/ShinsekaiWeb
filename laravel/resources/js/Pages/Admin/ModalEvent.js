@@ -12,8 +12,9 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
-import {Avatar, FormControl, FormControlLabel, FormGroup, Switch} from "@mui/material";
+import {Avatar, FormControl, FormControlLabel, FormGroup, InputLabel, Switch} from "@mui/material";
 import Grid from "@mui/material/Grid";
+import {DatePicker} from "@mui/lab";
 
 export default function ModalEvent({
                                      setEvents,
@@ -93,6 +94,7 @@ export default function ModalEvent({
                         description: "",
                         visible: false,
                         image: "",
+                        date: "",
                     }
                 });
                 setEvents(response.data);
@@ -126,6 +128,7 @@ export default function ModalEvent({
                         description: "",
                         image: "",
                         visible: false,
+                        date: "",
                     }
                 });
                 setEvents(response.data);
@@ -190,6 +193,21 @@ export default function ModalEvent({
                                 });
                             }}
                         />
+                        <Grid item>
+                            <InputLabel>Fecha del evento</InputLabel>
+                            <DatePicker
+                                views={['year', "month", "day"]}
+                                id="date"
+                                value={oneEvent.date}
+                                onChange={(newValue) => {
+                                    setEvent({
+                                        ...oneEvent,
+                                        date: newValue.format('YYYY/MM/DD')
+                                    });
+                                }}
+                                renderInput={(params) => <TextField {...params} helperText={null}/>}
+                            />
+                        </Grid>
                     </Grid>
                     <Grid item xl={3}>
                         <input type="file" id="filePicker" hidden

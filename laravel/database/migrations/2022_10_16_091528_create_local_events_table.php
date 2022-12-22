@@ -20,6 +20,7 @@ class CreateLocalEventsTable extends Migration
             $table->string("description", 10000);
             $table->string("image");
             $table->boolean("visible");
+            $table->date("eventDate");
             $table->softDeletes();
             $table->timestamps();
         });
