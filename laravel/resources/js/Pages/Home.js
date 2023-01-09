@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Web from "@/Layouts/Web";
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -12,7 +12,7 @@ export default function Home({homeElements}) {
     return (
         <Web>
             <Head title="Shinsekai - Home"/>
-            <Panel data={homeElements}/>
+            <Panel elements={homeElements}/>
         </Web>
     );
 }

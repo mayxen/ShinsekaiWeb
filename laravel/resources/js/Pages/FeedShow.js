@@ -6,14 +6,13 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import {Head} from "@inertiajs/inertia-react";
 
-export default function FeedShow({title}) {
+export default function FeedShow({title, data}) {
 
     return (
         <Web>
             <Head title={"Shinsekai - " + title}/>
             <div className="container feedShow">
-                <h4 className="titleFeed">{title}123</h4>
-
+                <h4 className="titleFeed">{title}</h4>
             </div>
         </Web>
     );

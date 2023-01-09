@@ -8,7 +8,6 @@ import Tarjeta from "@/Components/ShinComponents/Tarjeta";
 import {Head} from "@inertiajs/inertia-react";
 
 export default function Feed({title, data}) {
-
     return (
         <Web>
             <Head title={"Shinsekai - " + title}/>
@@ -16,9 +15,14 @@ export default function Feed({title, data}) {
                 <h4 className="titleFeed">{title}</h4>
 
                 <div className="tarjetas">
-                    {data.map((data, i) =>
-                        <Tarjeta key={i} data={data}/>
-                    )}
+                    {data.data !== undefined
+                        ?
+                        data.data.map((data, j) =>
+                            <Tarjeta key={j} type={title} data={data}/>)
+                        :
+                        data.map((data, j) =>
+                            <Tarjeta key={j} type={title} data={data}/>)
+                    }
                 </div>
             </div>
         </Web>
